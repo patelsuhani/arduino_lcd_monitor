@@ -65,3 +65,8 @@ void loop() {
   
   prevSwitchState = switchState;
 }
+
+// Function to get the length of the printed message on LCD
+int LiquidCrystal::printedLength() {
+  return (_numlines == 1) ? _numcols : _numcols * 2;
+}
