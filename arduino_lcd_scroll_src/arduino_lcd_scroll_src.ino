@@ -53,9 +53,15 @@ void loop() {
           break;
       }
       
+      // Start scrolling right
+      scrollPosition = lcd.printedLength();
+      while (scrollPosition > 0) {
+        lcd.scrollDisplayRight();
+        delay(500); // Adjust the delay according to your preference for scrolling speed
+        scrollPosition--;
+      }
     }
   }
   
   prevSwitchState = switchState;
 }
-
