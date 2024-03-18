@@ -13,4 +13,4 @@ Suhani Patel
 This project is released under the MIT License. See the LICENSE file for details.
 
 ## Acknowledgments
-- Special thanks to the Arduino community and the creators of the LiquidCrystal library.
+Special thanks to the Arduino community and the creators of the LiquidCrystal library.
