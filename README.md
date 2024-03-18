@@ -1,6 +1,7 @@
 **LCD Display**
 
 ## Description
+These Arduino projects leverage the capabilities of the LiquidCrystal library and hardware interfacing to create interactive experiences. Utilizing a combination of LCD displays and tilt switches, both the arduino_lcd_monitor.ino and arduino_monitor_scroll.ino deliver random responses to user queries. The arduino_lcd_monitor.ino randomly selects responses from a predefined set, while the arduino_monitor_scroll.ino presents a variety of fruits as responses and scrolls the font on the LCD screen.
 
 ## Components
 - Arduino board (e.g., Arduino Uno)
