@@ -52,12 +52,24 @@ void loop() {
           lcd.print("Lychee ");
           break;
       }
-
+      // Scroll logic
+      // Scroll 13 positions to the left
       for (int positionCounter = 0; positionCounter < 13; positionCounter++) {
         lcd.scrollDisplayLeft();
         delay(150);
       }
 
+      // Scroll 29 positions to the right
+      for (int positionCounter = 0; positionCounter < 29; positionCounter++) {
+        lcd.scrollDisplayRight();
+        delay(150);
+      }
+
+      // Scroll 16 positions to the left to move it back to the center
+      for (int positionCounter = 0; positionCounter < 16; positionCounter++) {
+        lcd.scrollDisplayLeft();
+        delay(150);
+      }
     }
   }
   
