@@ -5,9 +5,9 @@ const int switchPin = 6;
 int switchState = 0;
 int prevSwitchState = 0;
 int reply;
-int scrollPosition = 0; // Variable to keep track of the scrolling position
 
 void setup() {
+  Serial.begin(9600);
   lcd.begin(16, 2);
   pinMode(switchPin, INPUT);
   lcd.print("Ask the");
@@ -52,21 +52,17 @@ void loop() {
           lcd.print("Lychee ");
           break;
       }
-      
-      // Start scrolling right
-      scrollPosition = lcd.printedLength();
-      while (scrollPosition > 0) {
-        lcd.scrollDisplayRight();
-        delay(500); // Adjust the delay according to your preference for scrolling speed
-        scrollPosition--;
+
+      for (int positionCounter = 0; positionCounter < 13; positionCounter++) {
+        lcd.scrollDisplayLeft();
+        delay(150);
       }
+
     }
   }
   
   prevSwitchState = switchState;
-}
 
-// Function to get the length of the printed message on LCD
-int LiquidCrystal::printedLength() {
-  return (_numlines == 1) ? _numcols : _numcols * 2;
+  // Delay at the end of the full loop
+  delay(1000);
 }
