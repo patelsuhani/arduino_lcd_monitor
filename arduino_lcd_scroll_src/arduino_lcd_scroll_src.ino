@@ -1,31 +1,48 @@
 #include <LiquidCrystal.h>
 
+// Initialize the LiquidCrystal object with pin numbers
+
+//Define constants and variables
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 const int switchPin = 6;
 int switchState = 0;
 int prevSwitchState = 0;
 int reply;
-int scrollPosition = 0; // Variable to keep track of the scrolling position
 
 void setup() {
+  // Begin serial communication at 9600 baud rate
+  Serial.begin(9600);
+
+  // Initialize the LCD with 16 columns and 2 rows
   lcd.begin(16, 2);
+
+  // Set the switchPin as INPUT
   pinMode(switchPin, INPUT);
+
+  // Display initial message on LCD
   lcd.print("Ask the");
   lcd.setCursor(0, 1);
   lcd.print("Fruit Oracle!");
 }
 
 void loop() {
+  // Read the state of the switch
   switchState = digitalRead(switchPin);
   
+  // Check if the switch state has changed
   if (switchState != prevSwitchState) {
+    // If the switch is pressed (LOW state)
     if (switchState == LOW) {
+      // Generate a random number between 0 to 7
       reply = random(8);
+
+      // Clear the LCD screen
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("The oracle says: ");
       lcd.setCursor(0, 1);
       
+      // Display a fruit based on the random number
       switch(reply){
         case 0:
           lcd.print("Apple ");
@@ -52,21 +69,30 @@ void loop() {
           lcd.print("Lychee ");
           break;
       }
-      
-      // Start scrolling right
-      scrollPosition = lcd.printedLength();
-      while (scrollPosition > 0) {
+      // Scroll logic
+      // Scroll the text 13 positions to the left on the LCD
+      for (int positionCounter = 0; positionCounter < 13; positionCounter++) {
+        lcd.scrollDisplayLeft();
+        delay(150);
+      }
+
+      // Scroll the text 29 positions to the right on the LCD
+      for (int positionCounter = 0; positionCounter < 29; positionCounter++) {
         lcd.scrollDisplayRight();
-        delay(500); // Adjust the delay according to your preference for scrolling speed
-        scrollPosition--;
+        delay(150);
+      }
+
+      // Scroll the text 16 positions to the left to move it back to the center on the LCD
+      for (int positionCounter = 0; positionCounter < 16; positionCounter++) {
+        lcd.scrollDisplayLeft();
+        delay(150);
       }
     }
   }
   
+  // Update the previous switch state
   prevSwitchState = switchState;
-}
 
-// Function to get the length of the printed message on LCD
-int LiquidCrystal::printedLength() {
-  return (_numlines == 1) ? _numcols : _numcols * 2;
+  // Delay at the end of the full loop
+  delay(1000);
 }
